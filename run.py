@@ -13,3 +13,4 @@ if __name__ == "__main__":
     print(f"  Open in Browser: http://127.0.0.1:{port}")
     print(f"======================================================")
     uvicorn.run("app:app", host="127.0.0.1", port=port, reload=False)
+

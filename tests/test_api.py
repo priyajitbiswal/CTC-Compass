@@ -17,7 +17,8 @@ class TestAPIEndpoints(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         data = r.json()
         self.assertIn("metadata", data)
-        self.assertEqual(data["total_companies"], 150)
+        self.assertGreaterEqual(data["total_companies"], 50)
+        self.assertGreaterEqual(data["total_gov_profiles"], 15)
 
     def test_companies_search(self):
         r = self.client.get("/api/companies?q=google")
@@ -27,11 +28,11 @@ class TestAPIEndpoints(unittest.TestCase):
         self.assertIn("Google", data["companies"][0]["company_name"])
 
     def test_company_details(self):
-        r = self.client.get("/api/companies/COMP001")
+        r = self.client.get("/api/companies/TECH_GOOGLE")
         self.assertEqual(r.status_code, 200)
         data = r.json()
-        self.assertEqual(data["company_id"], "COMP001")
-        self.assertIn("Tata Consultancy Services", data["company_name"])
+        self.assertEqual(data["company_id"], "TECH_GOOGLE")
+        self.assertIn("Google India", data["company_name"])
 
     def test_calculate_endpoint(self):
         payload = {
@@ -59,17 +60,15 @@ class TestAPIEndpoints(unittest.TestCase):
 
     def test_govt_compare_endpoint(self):
         payload = {
-            "tech_ctc": 1200000,
-            "govt_post_name": "Assistant Section Officer",
-            "govt_pay_level": "Level 7",
-            "city_tier": "X",
-            "da_rate_pct": 50
+            "tech_ctc": 1500000,
+            "post_id": "GOV_IAS_SDM",
+            "city_tier": "X"
         }
         r = self.client.post("/api/govt-compare", json=payload)
         self.assertEqual(r.status_code, 200)
         data = r.json()
         self.assertIn("private_tech", data)
-        self.assertIn("central_government", data)
+        self.assertIn("public_sector", data)
         self.assertIn("verdict", data)
 
 

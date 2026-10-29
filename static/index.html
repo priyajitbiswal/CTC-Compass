@@ -47,16 +47,17 @@
     }
   </script>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-slate-950">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-slate-950">
 
   <!-- Top Announcement / Tax Banner -->
-  <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-indigo-950 border-b border-emerald-800/40 text-xs py-2 px-4 text-center flex items-center justify-center gap-2">
+  <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-indigo-950 border-b border-emerald-800/40 text-xs py-2 px-4 text-center flex flex-wrap items-center justify-center gap-2">
     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-      NEW: FY 2026-27 TAX RULES
+      FY 2026-27 TAX RULES
     </span>
     <span class="text-slate-300">
-      Income-tax Act, 2025 default regime: <strong class="text-emerald-400 font-semibold">₹0 Tax up to ₹12.75 LPA</strong> (with ₹75k Standard Deduction & Sec 156(2) full rebate).
+      New Tax Regime: <strong class="text-emerald-400 font-semibold">₹0 Tax up to ₹12.75 LPA</strong> (₹75k Standard Deduction + Sec 156(2) Rebate).
     </span>
+    <a href="#tab-taxguide" onclick="switchTab('taxguide')" class="text-emerald-400 underline hover:text-emerald-300 ml-1">View Slabs</a>
   </div>
 
   <!-- Navigation Header -->
@@ -71,7 +72,7 @@
             CTC Compass India
           </span>
           <span class="hidden sm:inline-block text-[11px] font-mono text-emerald-400/80 ml-2 px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">
-            v2.0 Verified
+            v3.0 Verified
           </span>
         </div>
       </div>
@@ -89,18 +90,18 @@
         </button>
         <button onclick="switchTab('sarkari')" id="tab-btn-sarkari" class="nav-tab flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all">
           <i data-lucide="landmark" class="w-4 h-4"></i>
-          <span class="hidden md:inline">Tech vs Sarkari</span>
-          <span class="md:hidden">Govt vs Tech</span>
+          <span class="hidden md:inline">Tech vs Govt & PSU</span>
+          <span class="md:hidden">Govt & PSU</span>
         </button>
         <button onclick="switchTab('explorer')" id="tab-btn-explorer" class="nav-tab flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all">
           <i data-lucide="building-2" class="w-4 h-4"></i>
           <span class="hidden md:inline">Salary Explorer</span>
           <span class="md:hidden">Explorer</span>
         </button>
-        <button onclick="switchTab('taxguide')" id="tab-btn-taxguide" class="nav-tab flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all">
-          <i data-lucide="receipt-text" class="w-4 h-4"></i>
-          <span class="hidden md:inline">Tax Slabs 2026</span>
-          <span class="md:hidden">Tax</span>
+        <button onclick="switchTab('glossary')" id="tab-btn-glossary" class="nav-tab flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all">
+          <i data-lucide="help-circle" class="w-4 h-4"></i>
+          <span class="hidden md:inline">Explain Terms</span>
+          <span class="md:hidden">Glossary</span>
         </button>
       </nav>
     </div>
@@ -113,101 +114,209 @@
     <!-- TAB 1: CTC REALITY DECONSTRUCTOR           -->
     <!-- ========================================== -->
     <section id="tab-calculator" class="tab-pane active space-y-6">
-      <!-- Hero Intro -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      
+      <!-- Header & Presets -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2 border-b border-slate-800">
         <div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            The CTC Reality Deconstructor
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <span>The CTC Reality Deconstructor</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono font-medium">Clear & Simple</span>
           </h1>
-          <p class="text-slate-400 text-sm mt-1">
-            Unpack that headline "15 LPA" CTC into actual guaranteed monthly bank deposits, taxes, and hidden employer overheads.
+          <p class="text-slate-400 text-sm mt-1 max-w-2xl">
+            Don't get fooled by big headline numbers. See exactly what goes to the government, what the company keeps, and what hits your bank account on the 30th.
           </p>
         </div>
-        <!-- Quick Preset Dropdown -->
-        <div class="flex items-center gap-2 bg-slate-800/80 p-2 rounded-xl border border-slate-700">
-          <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
-          <label class="text-xs text-slate-300 font-medium whitespace-nowrap">Load Preset:</label>
-          <select id="calc-preset-select" onchange="loadCalculatorPreset(this.value)" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-brand-500">
-            <option value="">-- Choose Company Preset --</option>
-            <option value="TCS_NINJA">TCS Ninja (Campus ₹3.4 LPA)</option>
-            <option value="TCS_DIGITAL">TCS Digital (Campus ₹7.0 LPA)</option>
-            <option value="HCL_ASCEND">HCLTech Ascend (₹3.75 LPA)</option>
-            <option value="WIPRO_TURBO">Wipro Turbo (₹6.5 LPA)</option>
-            <option value="FOODHUB">Foodhub Software (Campus ₹14.0 LPA)</option>
-            <option value="HYPERVERGE">HyperVerge (Campus ₹16.5 LPA)</option>
-            <option value="FUTURES_FIRST">Futures First (Campus ₹18.9 LPA)</option>
-            <option value="QUALCOMM">Qualcomm Associate (₹20.6 LPA)</option>
-            <option value="BROADCOM">Broadcom ICB-1 (₹42.3 LPA)</option>
+
+        <!-- Extensive Categorized Presets Dropdown -->
+        <div class="flex items-center gap-2 bg-slate-900 p-2.5 rounded-xl border border-slate-800 shadow-md">
+          <i data-lucide="zap" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+          <label class="text-xs text-slate-300 font-medium whitespace-nowrap">Load Preset Role:</label>
+          <select id="calc-preset-select" onchange="loadCalculatorPreset(this.value)" class="bg-slate-950 border border-slate-700 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-brand-500 max-w-xs">
+            <option value="">-- Choose from 30+ Tech & PSU Roles --</option>
+            <optgroup label="🎓 Campus IT Services & Mass Recruits">
+              <option value="TCS_NINJA">TCS Ninja (3.36 LPA)</option>
+              <option value="TCS_DIGITAL">TCS Digital (7.0 LPA)</option>
+              <option value="TCS_PRIME">TCS Prime (9.0 LPA)</option>
+              <option value="INFY_SE">Infosys Systems Engineer (3.6 LPA)</option>
+              <option value="INFY_DSE">Infosys Digital Specialist (6.5 LPA)</option>
+              <option value="INFY_SP">Infosys Power Programmer (9.5 LPA)</option>
+              <option value="WIPRO_ELITE">Wipro Elite (3.5 LPA)</option>
+              <option value="WIPRO_TURBO">Wipro Turbo (6.5 LPA)</option>
+              <option value="CTSH_GENC">Cognizant GenC (4.0 LPA)</option>
+              <option value="CTSH_ELEVATE">Cognizant GenC Elevate (6.0 LPA)</option>
+              <option value="ACN_ASE">Accenture ASE (4.5 LPA)</option>
+              <option value="ACN_FSE">Accenture Full Stack (6.5 LPA)</option>
+              <option value="HCL_ASCEND">HCLTech Ascend (3.75 LPA)</option>
+            </optgroup>
+            <optgroup label="🚀 Indian Product & FinTech Unicorns">
+              <option value="ZOHO">Zoho MTS (8.5 LPA - 100% Fixed Cash)</option>
+              <option value="FOODHUB">Foodhub Software (14.0 LPA)</option>
+              <option value="HYPERVERGE">HyperVerge (16.5 LPA)</option>
+              <option value="FUTURES_FIRST">Futures First (18.9 LPA)</option>
+              <option value="SWIGGY">Swiggy SDE 1 (22.0 LPA)</option>
+              <option value="ZOMATO">Zomato SDE 1 (22.0 LPA)</option>
+              <option value="FLIPKART">Flipkart SDE 1 (26.0 LPA)</option>
+              <option value="MEESHO">Meesho SDE 1 (26.0 LPA)</option>
+              <option value="RAZORPAY">Razorpay SDE 1 (24.0 LPA)</option>
+              <option value="PHONEPE">PhonePe SDE 1 (26.0 LPA)</option>
+            </optgroup>
+            <optgroup label="🌐 Global Tech & Product Giants">
+              <option value="CISCO">Cisco Software Engineer (18.0 LPA)</option>
+              <option value="ORACLE">Oracle OCI Engineer (20.0 LPA)</option>
+              <option value="QUALCOMM">Qualcomm Associate (20.6 LPA)</option>
+              <option value="ADOBE">Adobe MTS 1 (28.0 LPA)</option>
+              <option value="SALESFORCE">Salesforce AMTS (30.0 LPA)</option>
+              <option value="MICROSOFT">Microsoft SDE 1 (32.0 LPA)</option>
+              <option value="AMAZON">Amazon SDE 1 (34.0 LPA)</option>
+              <option value="GOOGLE">Google L3 SDE (35.0 LPA)</option>
+              <option value="UBER">Uber Software Engineer 1 (42.0 LPA)</option>
+              <option value="ATLASSIAN">Atlassian Graduate SDE (38.0 LPA)</option>
+              <option value="BROADCOM">Broadcom ICB-1 (42.3 LPA)</option>
+            </optgroup>
+            <optgroup label="🏦 Investment Banks & Quant">
+              <option value="MS">Morgan Stanley Analyst (23.0 LPA)</option>
+              <option value="GS">Goldman Sachs Analyst (26.0 LPA)</option>
+              <option value="DESHAW">D. E. Shaw MTS (50.0 LPA)</option>
+            </optgroup>
           </select>
         </div>
       </div>
 
-      <!-- Two-Column Layout: Controls (Left) vs Dashboard (Right) -->
+      <!-- Quick-Tap CTC Pills for Instant Calculation -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+        <span class="text-slate-400 font-medium whitespace-nowrap">Quick Select CTC:</span>
+        <button onclick="setQuickCtc(360000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹3.6 LPA</button>
+        <button onclick="setQuickCtc(650000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹6.5 LPA</button>
+        <button onclick="setQuickCtc(1000000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹10 LPA</button>
+        <button onclick="setQuickCtc(1200000)" class="quick-pill px-3 py-1 rounded-full bg-brand-900/60 border border-brand-500/50 text-emerald-400 font-mono font-bold transition-colors">₹12 LPA (Zero Tax)</button>
+        <button onclick="setQuickCtc(1500000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹15 LPA</button>
+        <button onclick="setQuickCtc(2000000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹20 LPA</button>
+        <button onclick="setQuickCtc(3000000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹30 LPA</button>
+        <button onclick="setQuickCtc(4500000)" class="quick-pill px-3 py-1 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-mono transition-colors">₹45 LPA</button>
+      </div>
+
+      <!-- Educational Visual Pipeline: How CTC Becomes In-Hand -->
+      <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 rounded-2xl p-4 border border-slate-800 shadow-xl overflow-x-auto">
+        <div class="flex items-center justify-between min-w-[700px] gap-2 text-center text-xs">
+          <!-- Step 1 -->
+          <div class="flex-1 p-3 rounded-xl bg-slate-950/80 border border-slate-700">
+            <span class="text-[10px] text-slate-400 block uppercase font-bold">1. Headline CTC</span>
+            <span id="pipe-ctc" class="text-base font-black text-white font-mono mt-0.5 block">₹12,00,000</span>
+            <span class="text-[10px] text-slate-500">What HR offered you</span>
+          </div>
+
+          <i data-lucide="minus" class="w-4 h-4 text-rose-400 shrink-0"></i>
+
+          <!-- Step 2 -->
+          <div class="flex-1 p-3 rounded-xl bg-slate-950/80 border border-slate-700">
+            <span class="text-[10px] text-rose-400 block uppercase font-bold">2. Employer Costs</span>
+            <span id="pipe-employer" class="text-base font-black text-rose-400 font-mono mt-0.5 block">-₹68,534</span>
+            <span class="text-[10px] text-slate-500">PF, Gratuity, Insurance</span>
+          </div>
+
+          <i data-lucide="equal" class="w-4 h-4 text-slate-400 shrink-0"></i>
+
+          <!-- Step 3 -->
+          <div class="flex-1 p-3 rounded-xl bg-slate-950/80 border border-slate-700">
+            <span class="text-[10px] text-amber-400 block uppercase font-bold">3. Gross Cash</span>
+            <span id="pipe-gross" class="text-base font-black text-amber-300 font-mono mt-0.5 block">₹11,31,466</span>
+            <span class="text-[10px] text-slate-500">Listed on your payslip</span>
+          </div>
+
+          <i data-lucide="minus" class="w-4 h-4 text-rose-400 shrink-0"></i>
+
+          <!-- Step 4 -->
+          <div class="flex-1 p-3 rounded-xl bg-slate-950/80 border border-slate-700">
+            <span class="text-[10px] text-rose-400 block uppercase font-bold">4. Deductions & Tax</span>
+            <span id="pipe-deductions" class="text-base font-black text-rose-400 font-mono mt-0.5 block">-₹24,000</span>
+            <span class="text-[10px] text-slate-500">TDS + Your PF + PT</span>
+          </div>
+
+          <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+
+          <!-- Step 5 -->
+          <div class="flex-1 p-3 rounded-xl bg-gradient-to-br from-emerald-950 to-slate-900 border-2 border-emerald-500/60 shadow-lg shadow-emerald-950/50">
+            <span class="text-[10px] text-emerald-400 block uppercase font-black">5. Real Take-Home</span>
+            <span id="pipe-inhand" class="text-lg font-black text-emerald-300 font-mono mt-0.5 block">₹82,450/mo</span>
+            <span class="text-[10px] text-emerald-400 font-semibold">Hits your bank!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Column Interactive Layout -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- Controls Column (4 cols) -->
-        <div class="lg:col-span-5 bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80 space-y-5">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+        <!-- Controls Column (5 cols) -->
+        <div class="lg:col-span-5 bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-5 shadow-lg">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
               <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i>
-              Offer Parameters
+              Customize Your Offer
             </h2>
-            <button onclick="resetCalculatorDefaults()" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">
-              Reset defaults
+            <button onclick="resetCalculatorDefaults()" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1">
+              <i data-lucide="rotate-ccw" class="w-3 h-3"></i> Reset
             </button>
           </div>
 
           <!-- Annual CTC Input -->
           <div class="space-y-2">
             <div class="flex items-center justify-between">
-              <label for="input-ctc" class="text-sm font-semibold text-slate-200">Headline Annual CTC (₹)</label>
+              <label for="input-ctc" class="text-sm font-semibold text-slate-200 flex items-center gap-1.5">
+                Headline Annual CTC
+                <span class="cursor-pointer text-slate-400 hover:text-white" title="Cost to Company: The total annual expense your employer claims to spend on you."><i data-lucide="help-circle" class="w-3.5 h-3.5"></i></span>
+              </label>
               <span id="label-ctc-lakhs" class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">
                 12.00 LPA
               </span>
             </div>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 font-mono text-sm">₹</span>
-              <input type="number" id="input-ctc" value="1200000" step="50000" min="100000" max="10000000" oninput="handleCtcInputChange(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-4 py-2.5 text-white font-mono font-bold text-base focus:border-brand-500 focus:outline-none">
+              <input type="number" id="input-ctc" value="1200000" step="50000" min="100000" max="10000000" oninput="handleCtcInputChange(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-8 pr-4 py-2.5 text-white font-mono font-bold text-base focus:border-brand-500 focus:outline-none">
             </div>
             <input type="range" id="slider-ctc" min="300000" max="5000000" step="50000" value="1200000" oninput="handleCtcSliderChange(this.value)" class="w-full accent-emerald-500 cursor-pointer">
           </div>
 
-          <!-- Basic Pay Percentage -->
-          <div class="space-y-1.5">
+          <!-- Basic Pay Ratio -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800">
             <div class="flex items-center justify-between">
-              <label for="slider-basic" class="text-xs font-medium text-slate-300">Basic Salary Ratio (% of CTC)</label>
-              <span id="label-basic-pct" class="text-xs font-mono text-slate-200">40%</span>
+              <span class="text-xs font-medium text-slate-300 flex items-center gap-1">
+                Basic Salary Ratio
+                <span class="cursor-pointer text-slate-500 hover:text-slate-300" title="The core portion of your salary. HRA and PF are calculated as percentages of Basic."><i data-lucide="help-circle" class="w-3.5 h-3.5"></i></span>
+              </span>
+              <span id="label-basic-pct" class="text-xs font-mono font-bold text-emerald-400">40%</span>
             </div>
             <input type="range" id="slider-basic" min="20" max="60" step="5" value="40" oninput="updateCalculation()" class="w-full accent-emerald-500 cursor-pointer">
-            <div class="flex justify-between text-[11px] text-slate-400">
+            <div class="flex justify-between text-[10px] text-slate-400">
               <span>20% (Low Base)</span>
-              <span class="text-emerald-400/90 font-medium">40% (Standard)</span>
-              <span>50% (New Labour Code)</span>
+              <span class="text-emerald-400 font-semibold">40% (Most Common in IT)</span>
+              <span>50% (New Wage Code)</span>
             </div>
           </div>
 
-          <!-- Variable Pay Percentage -->
-          <div class="space-y-1.5">
+          <!-- Variable Bonus -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800">
             <div class="flex items-center justify-between">
-              <label for="slider-variable" class="text-xs font-medium text-slate-300">Target Variable Bonus (% of CTC)</label>
-              <span id="label-variable-pct" class="text-xs font-mono text-amber-400">10%</span>
+              <span class="text-xs font-medium text-slate-300 flex items-center gap-1">
+                Target Variable Pay / Bonus
+                <span class="cursor-pointer text-slate-500 hover:text-slate-300" title="Performance bonus paid quarterly or annually. Not guaranteed!"><i data-lucide="help-circle" class="w-3.5 h-3.5"></i></span>
+              </span>
+              <span id="label-variable-pct" class="text-xs font-mono font-bold text-amber-400">10%</span>
             </div>
             <input type="range" id="slider-variable" min="0" max="50" step="5" value="10" oninput="updateCalculation()" class="w-full accent-amber-500 cursor-pointer">
-            <div class="flex justify-between text-[11px] text-slate-400">
-              <span>0% (100% Fixed)</span>
-              <span>10% - 15% (Typical IT)</span>
-              <span>30%+ (High Variable)</span>
+            <div class="flex justify-between text-[10px] text-slate-400">
+              <span>0% (100% Guaranteed)</span>
+              <span>10% - 15% (Typical)</span>
+              <span>30%+ (High Risk)</span>
             </div>
           </div>
 
-          <!-- Bonuses & Stocks (Accordion / Collapsible) -->
-          <div class="pt-2 border-t border-slate-700/60 space-y-3">
-            <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider block">Bonuses & Equity (Year 1)</span>
-            
+          <!-- Joining Bonus & Stocks -->
+          <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider block">Year 1 One-Time Perks</span>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label for="input-joining" class="text-[11px] text-slate-400 block mb-1">Joining Bonus (₹)</label>
-                <input type="number" id="input-joining" value="0" step="10000" min="0" oninput="updateCalculation()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-white focus:border-brand-500 focus:outline-none">
+                <input type="number" id="input-joining" value="0" step="25000" min="0" oninput="updateCalculation()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-white focus:border-brand-500 focus:outline-none">
               </div>
               <div>
                 <label for="input-equity" class="text-[11px] text-slate-400 block mb-1">Stocks / ESOPs Yr 1 (₹)</label>
@@ -216,114 +325,124 @@
             </div>
           </div>
 
-          <!-- Statutory & Tax Toggles -->
-          <div class="pt-2 border-t border-slate-700/60 space-y-3">
-            <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider block">Tax & Statutory Preferences</span>
-            
-            <!-- Tax Regime Toggle -->
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/80 border border-slate-700">
+          <!-- Tax Regime & EPF Toggles -->
+          <div class="space-y-3 pt-2 border-t border-slate-800">
+            <!-- Tax Toggle -->
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800">
               <div>
-                <span class="text-xs font-bold text-white block">Tax Regime</span>
-                <span class="text-[11px] text-slate-400">FY 2026-27 (Income-tax Act, 2025)</span>
+                <span class="text-xs font-bold text-white block">Income Tax Regime</span>
+                <span class="text-[10px] text-slate-400">FY 2026-27 (Income-tax Act, 2025)</span>
               </div>
-              <div class="flex bg-slate-800 p-0.5 rounded-lg border border-slate-700">
+              <div class="flex bg-slate-900 p-0.5 rounded-lg border border-slate-700">
                 <button type="button" id="btn-regime-new" onclick="setTaxRegime('new')" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-brand-600 text-white">New Slabs</button>
                 <button type="button" id="btn-regime-old" onclick="setTaxRegime('old')" class="px-2.5 py-1 text-xs font-semibold rounded-md text-slate-400 hover:text-white">Old Regime</button>
               </div>
             </div>
 
-            <!-- EPF Ceiling Toggle -->
+            <!-- EPF Cap Toggle -->
             <label class="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" id="check-epf-cap" checked onchange="updateCalculation()" class="mt-0.5 rounded border-slate-700 text-brand-600 focus:ring-brand-500">
               <div class="text-xs">
-                <span class="text-slate-200 font-medium block">Cap EPF at Statutory Wage Ceiling</span>
-                <span class="text-slate-400 text-[11px]">₹1,800/mo (12% of ₹15,000 ceiling). Uncheck for 12% of actual basic.</span>
+                <span class="text-slate-200 font-medium block">Cap EPF at Statutory ₹1,800/mo</span>
+                <span class="text-slate-500 text-[10px]">Leaves more cash in hand every month. Uncheck to deduct 12% of full basic.</span>
               </div>
             </label>
 
-            <!-- Gratuity in CTC Toggle -->
+            <!-- Gratuity Toggle -->
             <label class="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" id="check-gratuity" checked onchange="updateCalculation()" class="mt-0.5 rounded border-slate-700 text-brand-600 focus:ring-brand-500">
               <div class="text-xs">
-                <span class="text-slate-200 font-medium block">Include Gratuity in CTC (4.81% of Basic)</span>
-                <span class="text-slate-400 text-[11px]">Most Indian IT companies deduct gratuity provision from headline CTC.</span>
+                <span class="text-slate-200 font-medium block">Deduct Gratuity (4.81% of Basic)</span>
+                <span class="text-slate-500 text-[10px]">Companies deduct this from CTC even though you only get it after 5 continuous years!</span>
               </div>
             </label>
           </div>
 
         </div>
 
-        <!-- Output Dashboard Column (7 cols) -->
+        <!-- Dashboard Outputs Column (7 cols) -->
         <div class="lg:col-span-7 space-y-6">
           
-          <!-- Key Metric Cards Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <!-- Metric 1: Monthly In-Hand -->
-            <div class="bg-gradient-to-br from-emerald-950/80 to-slate-900 border border-emerald-600/40 rounded-2xl p-4 shadow-lg shadow-emerald-950/30">
-              <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider block">Monthly In-Hand</span>
-              <span id="metric-monthly-inhand" class="text-xl sm:text-2xl font-black text-white font-mono mt-1 block">
-                ₹82,450
-              </span>
-              <span class="text-[10px] text-slate-400 block mt-0.5">Guaranteed fixed cash</span>
+          <!-- Big Highlight Banner: The Bottom Line -->
+          <div class="bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-950 border-2 border-emerald-500/50 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                  <i data-lucide="check-circle-2" class="w-4 h-4"></i> Guaranteed Monthly In-Hand Cash
+                </span>
+                <span id="metric-monthly-inhand" class="text-3xl sm:text-4xl font-black text-white font-mono mt-1 block tracking-tight">
+                  ₹82,450
+                </span>
+                <p id="plain-english-verdict" class="text-xs text-slate-300 mt-2 max-w-md">
+                  For every ₹100 of your CTC, you take home <strong class="text-emerald-400">₹82.5 in liquid cash</strong>.
+                </p>
+              </div>
+
+              <!-- Quick Reality Badge -->
+              <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-center sm:text-right shrink-0">
+                <span class="text-[10px] text-slate-400 uppercase font-semibold block">CTC Realization Rate</span>
+                <span id="metric-realization-rate" class="text-2xl font-black font-mono text-emerald-400">82.5%</span>
+                <span class="text-[10px] text-slate-500 block mt-0.5">Liquid cash percentage</span>
+              </div>
             </div>
 
-            <!-- Metric 2: Annual Take-Home -->
-            <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4">
-              <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider block">Year 1 Net Cash</span>
-              <span id="metric-annual-inhand" class="text-xl sm:text-2xl font-black text-white font-mono mt-1 block">
-                ₹9,89,400
+            <!-- Year 2 Drop Warning (if bonus present) -->
+            <div id="year2-warning-banner" class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300">
+              <span class="flex items-center gap-1 text-slate-400">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-400"></i> Sustainable Year 2+ Cash:
               </span>
-              <span id="metric-y2-annual" class="text-[10px] text-slate-400 block mt-0.5">Yr 2: ₹9,89,400</span>
-            </div>
-
-            <!-- Metric 3: Total Income Tax -->
-            <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4">
-              <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider block">Income Tax (TY 26-27)</span>
-              <span id="metric-annual-tax" class="text-xl sm:text-2xl font-black text-rose-400 font-mono mt-1 block">
-                ₹0
-              </span>
-              <span id="metric-effective-tax" class="text-[10px] text-slate-400 block mt-0.5">0.0% effective rate</span>
-            </div>
-
-            <!-- Metric 4: Realization Rate -->
-            <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4">
-              <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider block">CTC Realization</span>
-              <span id="metric-realization-rate" class="text-xl sm:text-2xl font-black text-amber-400 font-mono mt-1 block">
-                82.5%
-              </span>
-              <span class="text-[10px] text-slate-400 block mt-0.5">Net cash / Headline CTC</span>
+              <span id="metric-y2-annual" class="font-mono font-bold text-slate-200">₹9,89,400 / year</span>
             </div>
           </div>
 
-          <!-- The Visual Waterfall Breakdown Chart -->
-          <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80">
-            <div class="flex items-center justify-between mb-4">
+          <!-- Secondary Metric Chips -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3">
+              <span class="text-[10px] text-slate-400 uppercase font-semibold block">Annual Net Cash</span>
+              <span id="metric-annual-inhand" class="text-lg font-bold font-mono text-white mt-0.5 block">₹9,89,400</span>
+              <span class="text-[10px] text-slate-500">Year 1 take-home</span>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3">
+              <span class="text-[10px] text-slate-400 uppercase font-semibold block">Annual Income Tax</span>
+              <span id="metric-annual-tax" class="text-lg font-bold font-mono text-rose-400 mt-0.5 block">₹0</span>
+              <span id="metric-effective-tax" class="text-[10px] text-emerald-400">0.0% effective tax</span>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3 col-span-2 sm:col-span-1">
+              <span class="text-[10px] text-slate-400 uppercase font-semibold block">Company Retentions</span>
+              <span id="metric-employer-overhead" class="text-lg font-bold font-mono text-amber-400 mt-0.5 block">₹68,534</span>
+              <span class="text-[10px] text-slate-500">PF + Gratuity + Ins</span>
+            </div>
+          </div>
+
+          <!-- Visual Breakdown Chart -->
+          <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between mb-3">
               <h3 class="text-sm font-bold text-white flex items-center gap-2">
                 <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-400"></i>
-                Where Does Your CTC Go?
+                CTC Slice: Where Does Each Rupee Go?
               </h3>
               <span class="text-xs font-mono text-slate-400" id="chart-ctc-label">12 LPA Breakdown</span>
             </div>
-            <div class="h-64 w-full">
+            <div class="h-60 w-full">
               <canvas id="ctcBreakdownChart"></canvas>
             </div>
           </div>
 
-          <!-- Monthly Payslip Deconstruction Table -->
-          <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80 space-y-4">
+          <!-- Monthly Salary Slip Table -->
+          <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-4">
             <h3 class="text-sm font-bold text-white flex items-center gap-2">
               <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-400"></i>
-              Estimated Monthly Salary Slip
+              Your Estimated Monthly Salary Slip
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
               <!-- Earnings -->
-              <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-700/60 space-y-2">
-                <span class="font-bold text-emerald-400 uppercase tracking-wider text-[11px] block border-b border-slate-800 pb-1">
+              <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 space-y-2">
+                <span class="font-bold text-emerald-400 uppercase tracking-wider text-[11px] block border-b border-slate-850 pb-1">
                   Gross Earnings (Monthly)
                 </span>
                 <div class="flex justify-between py-1 text-slate-300">
-                  <span>Basic Salary</span>
+                  <span>Basic Pay</span>
                   <span id="slip-basic" class="text-white">₹38,000</span>
                 </div>
                 <div class="flex justify-between py-1 text-slate-300">
@@ -331,18 +450,18 @@
                   <span id="slip-hra" class="text-white">₹15,200</span>
                 </div>
                 <div class="flex justify-between py-1 text-slate-300">
-                  <span>Special / Flexi Allowance</span>
+                  <span>Special Allowance</span>
                   <span id="slip-special" class="text-white">₹33,800</span>
                 </div>
                 <div class="flex justify-between pt-2 border-t border-slate-800 font-bold text-slate-100">
-                  <span>Total Gross Monthly Cash</span>
+                  <span>Total Gross Salary</span>
                   <span id="slip-gross" class="text-emerald-400">₹87,000</span>
                 </div>
               </div>
 
               <!-- Deductions -->
-              <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-700/60 space-y-2">
-                <span class="font-bold text-rose-400 uppercase tracking-wider text-[11px] block border-b border-slate-800 pb-1">
+              <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 space-y-2">
+                <span class="font-bold text-rose-400 uppercase tracking-wider text-[11px] block border-b border-slate-850 pb-1">
                   Employee Deductions (Monthly)
                 </span>
                 <div class="flex justify-between py-1 text-slate-300">
@@ -364,11 +483,11 @@
               </div>
             </div>
 
-            <!-- Employer Cost Note -->
-            <div class="p-3 bg-slate-900/50 rounded-xl border border-slate-800 text-[11px] text-slate-400 flex items-start gap-2">
-              <i data-lucide="info" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <!-- Footnote on Employer Deductions -->
+            <div class="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-[11px] text-slate-400 flex items-start gap-2">
+              <i data-lucide="info" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
               <span>
-                <strong>Employer Overheads in CTC:</strong> Employer PF (<span id="note-employer-pf" class="text-slate-200">₹21,600/yr</span>), Gratuity provision (<span id="note-gratuity" class="text-slate-200">₹21,934/yr</span>), and Health Insurance are factored out before arriving at your gross cash salary.
+                <strong>Why doesn't your payslip match your CTC?</strong> Your employer deducts their own PF contribution (<span id="note-employer-pf" class="text-slate-200">₹21,600/yr</span>), Gratuity reserve (<span id="note-gratuity" class="text-slate-200">₹21,934/yr</span>), and Medical Insurance before arriving at your gross cash salary.
               </span>
             </div>
           </div>
@@ -385,104 +504,101 @@
       <div class="border-b border-slate-800 pb-3">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
           <i data-lucide="swords" class="w-7 h-7 text-amber-400"></i>
-          Offer Clash: Side-by-Side Evaluator
+          Offer Clash: Side-by-Side Duel
         </h1>
         <p class="text-slate-400 text-sm mt-1">
-          Pitting a high-variable startup offer against a high-fixed MNC package? See true net in-hand cash and year 2 cliffs.
+          Have two job offers? Pit a high-variable startup package against a high-fixed MNC offer and see the real liquidity winner.
         </p>
       </div>
 
-      <!-- Offer Clash Duel Inputs -->
+      <!-- Duel Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
         <!-- Offer A Card -->
-        <div class="bg-slate-800/60 rounded-2xl p-5 border border-indigo-500/40 space-y-4">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-700">
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-indigo-500/40 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800">
             <input type="text" id="clash-a-name" value="Startup Alpha (High Variable)" class="bg-transparent text-base font-bold text-indigo-400 focus:outline-none focus:border-b border-indigo-400 w-3/4">
             <span class="text-xs px-2 py-0.5 bg-indigo-950 text-indigo-300 rounded border border-indigo-800 font-mono">Offer A</span>
           </div>
           <div class="space-y-3 text-xs">
             <div>
               <label class="text-slate-300 font-semibold block mb-1">Headline Annual CTC (₹)</label>
-              <input type="number" id="clash-a-ctc" value="1800000" step="50000" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
+              <input type="number" id="clash-a-ctc" value="1800000" step="50000" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="text-slate-300 block mb-1">Variable Pay (%)</label>
-                <input type="number" id="clash-a-var" value="20" min="0" max="60" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white">
+                <input type="number" id="clash-a-var" value="20" min="0" max="60" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white">
               </div>
               <div>
                 <label class="text-slate-300 block mb-1">Joining Bonus (₹)</label>
-                <input type="number" id="clash-a-bonus" value="200000" step="25000" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white">
+                <input type="number" id="clash-a-bonus" value="200000" step="25000" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white">
               </div>
             </div>
             <div>
               <label class="text-slate-300 block mb-1">Annual Stock / ESOP Vesting (₹)</label>
-              <input type="number" id="clash-a-stock" value="100000" step="50000" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white">
+              <input type="number" id="clash-a-stock" value="100000" step="50000" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white">
             </div>
           </div>
         </div>
 
         <!-- Offer B Card -->
-        <div class="bg-slate-800/60 rounded-2xl p-5 border border-emerald-500/40 space-y-4">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-700">
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-emerald-500/40 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800">
             <input type="text" id="clash-b-name" value="Global MNC Beta (High Fixed)" class="bg-transparent text-base font-bold text-emerald-400 focus:outline-none focus:border-b border-emerald-400 w-3/4">
             <span class="text-xs px-2 py-0.5 bg-emerald-950 text-emerald-300 rounded border border-emerald-800 font-mono">Offer B</span>
           </div>
           <div class="space-y-3 text-xs">
             <div>
               <label class="text-slate-300 font-semibold block mb-1">Headline Annual CTC (₹)</label>
-              <input type="number" id="clash-b-ctc" value="1500000" step="50000" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
+              <input type="number" id="clash-b-ctc" value="1500000" step="50000" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="text-slate-300 block mb-1">Variable Pay (%)</label>
-                <input type="number" id="clash-b-var" value="5" min="0" max="60" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white">
+                <input type="number" id="clash-b-var" value="5" min="0" max="60" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white">
               </div>
               <div>
                 <label class="text-slate-300 block mb-1">Joining Bonus (₹)</label>
-                <input type="number" id="clash-b-bonus" value="0" step="25000" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white">
+                <input type="number" id="clash-b-bonus" value="0" step="25000" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white">
               </div>
             </div>
             <div>
               <label class="text-slate-300 block mb-1">Annual Stock / ESOP Vesting (₹)</label>
-              <input type="number" id="clash-b-stock" value="0" step="50000" oninput="runOfferClash()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white">
+              <input type="number" id="clash-b-stock" value="0" step="50000" oninput="runOfferClash()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white">
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Verdict Banner -->
-      <div id="clash-verdict-box" class="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/60 to-slate-900 border border-indigo-500/50 flex items-start gap-3">
-        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5">
-          <i data-lucide="award" class="w-5 h-5"></i>
+      <div id="clash-verdict-box" class="p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-indigo-500/50 flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5">
+          <i data-lucide="award" class="w-6 h-6"></i>
         </div>
         <div>
           <h3 id="clash-verdict-title" class="text-sm font-bold text-white">Comparing Offers...</h3>
-          <p id="clash-verdict-desc" class="text-xs text-slate-300 mt-0.5"></p>
+          <p id="clash-verdict-desc" class="text-xs text-slate-300 mt-1"></p>
         </div>
       </div>
 
       <!-- Head-to-Head Comparison Table -->
-      <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80 overflow-x-auto">
+      <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 overflow-x-auto">
         <table class="w-full text-xs font-mono">
           <thead>
-            <tr class="border-b border-slate-700 text-left text-slate-400">
+            <tr class="border-b border-slate-800 text-left text-slate-400">
               <th class="py-3 px-4 font-semibold">Compensation Dimension</th>
               <th id="clash-table-header-a" class="py-3 px-4 font-bold text-indigo-400">Offer A</th>
               <th id="clash-table-header-b" class="py-3 px-4 font-bold text-emerald-400">Offer B</th>
               <th class="py-3 px-4 font-semibold text-right">Advantage / Diff</th>
             </tr>
           </thead>
-          <tbody id="clash-table-body" class="divide-y divide-slate-700/60 text-slate-200">
-            <!-- Populated via JS -->
+          <tbody id="clash-table-body" class="divide-y divide-slate-800 text-slate-200">
           </tbody>
         </table>
       </div>
 
       <!-- Clash Bar Chart -->
-      <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80">
+      <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800">
         <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2">
           <i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-400"></i>
           Cash Flow Comparison (Monthly & Annual)
@@ -491,62 +607,81 @@
           <canvas id="clashComparisonChart"></canvas>
         </div>
       </div>
-
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 3: TECH VS SARKARI (GOVT COMPARATOR)   -->
+    <!-- TAB 3: TECH VS GOVT & PSU                  -->
     <!-- ========================================== -->
     <section id="tab-sarkari" class="tab-pane hidden space-y-6">
       <div class="border-b border-slate-800 pb-3">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
           <i data-lucide="landmark" class="w-7 h-7 text-sarkari-500"></i>
-          Tech vs Sarkari: Private IT vs Central Government
+          Tech vs Public Sector: Private IT vs Central Govt & PSUs
         </h1>
         <p class="text-slate-400 text-sm mt-1">
-          Compare private software engineering packages against Central Civil Service 7th CPC posts (SSC CGL / UPSC) accounting for DA, HRA, NPS, job security, and work-life balance.
+          Compare private tech offers against IAS, IPS, ISRO Scientists, Maharatna PSUs (ONGC, IOCL), Banking (RBI Grade B, SBI PO), and SSC CGL Central Posts.
         </p>
       </div>
 
       <!-- Controls Row -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-800/60 p-4 rounded-2xl border border-slate-700/80 text-xs">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-xs">
         <!-- Private CTC Input -->
         <div>
           <label class="text-slate-300 font-semibold block mb-1">Private Tech CTC (₹)</label>
-          <input type="number" id="sarkari-tech-ctc" value="1200000" step="50000" oninput="runGovtComparison()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
+          <input type="number" id="sarkari-tech-ctc" value="1500000" step="50000" oninput="runGovtComparison()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
         </div>
-        <!-- Govt Post Selection -->
+        <!-- Comprehensive Govt & PSU Post Selector -->
         <div>
-          <label class="text-slate-300 font-semibold block mb-1">Central Government Post</label>
-          <select id="sarkari-post-select" onchange="runGovtComparison()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
-            <option value="Level 8|Assistant Audit Officer (Central Cadre)">Level 8: Assistant Audit Officer (CAG)</option>
-            <option value="Level 7|Assistant Section Officer (CSS)" selected>Level 7: Assistant Section Officer (CSS)</option>
-            <option value="Level 7|Inspector of Income Tax (CBDT)">Level 7: Inspector of Income Tax (CBDT)</option>
-            <option value="Level 6|Divisional Accountant">Level 6: Divisional Accountant</option>
-            <option value="Level 5|Auditor (CAG)">Level 5: Auditor (CAG)</option>
-            <option value="Level 4|Tax Assistant (CBDT/CBIC)">Level 4: Tax Assistant</option>
+          <label class="text-slate-300 font-semibold block mb-1">Public Sector / Govt Role</label>
+          <select id="sarkari-post-select" onchange="runGovtComparison()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+            <optgroup label="👑 All India Services & Group A (UPSC CSE)">
+              <option value="GOV_IAS_SDM" selected>IAS Officer (Sub-Divisional Magistrate / SDM)</option>
+              <option value="GOV_IPS_ASP">IPS Officer (Assistant Superintendent of Police)</option>
+              <option value="GOV_IFS_SECRETARY">IFS Diplomat (Indian Foreign Service - MEA)</option>
+            </optgroup>
+            <optgroup label="🚀 Premier Scientific & Defense Research">
+              <option value="GOV_ISRO_SCIENTIST">ISRO Scientist / Engineer 'SC'</option>
+              <option value="GOV_DRDO_SCIENTIST">DRDO Scientist 'B'</option>
+            </optgroup>
+            <optgroup label="🏦 Apex Banking Regulators & PSUs">
+              <option value="GOV_RBI_GRADE_B">RBI Grade B Manager (₹32 LPA CTC Eq.)</option>
+              <option value="GOV_SEBI_GRADE_A">SEBI Grade A Officer (₹34 LPA CTC Eq.)</option>
+              <option value="GOV_SBI_PO">SBI Probationary Officer (₹18 LPA CTC Eq.)</option>
+            </optgroup>
+            <optgroup label="⚡ Maharatna Energy PSUs (GATE)">
+              <option value="GOV_ONGC_AEE">ONGC Executive Engineer (₹24 LPA CTC Eq.)</option>
+              <option value="GOV_IOCL_OFFICER">Indian Oil / IOCL Engineer (₹21 LPA CTC Eq.)</option>
+              <option value="GOV_NTPC_ET">NTPC Executive Trainee (₹17 LPA CTC Eq.)</option>
+            </optgroup>
+            <optgroup label="🏛️ Staff Selection Commission (SSC CGL)">
+              <option value="GOV_SSC_IT_INSPECTOR">Inspector of Income Tax (CBDT)</option>
+              <option value="GOV_SSC_ASO_MEA">ASO in Ministry of External Affairs</option>
+              <option value="GOV_SSC_ASO_CSS">ASO in Central Secretariat (CSS)</option>
+              <option value="GOV_SSC_CBI_SI">Sub-Inspector in CBI (25% Special Allowance)</option>
+              <option value="GOV_SSC_AAO_CAG">Assistant Audit Officer in CAG (Level 8)</option>
+              <option value="GOV_SSC_DIV_ACCOUNTANT">Divisional Accountant (Level 6)</option>
+              <option value="GOV_SSC_TAX_ASSISTANT">Tax Assistant (CBDT/CBIC - Level 4)</option>
+            </optgroup>
+            <optgroup label="🚆 Indian Railways (RRB NTPC)">
+              <option value="GOV_RRB_STATION_MASTER">Railway Station Master (Level 6)</option>
+            </optgroup>
           </select>
         </div>
         <!-- City Tier -->
         <div>
           <label class="text-slate-300 font-semibold block mb-1">City Class (HRA Tier)</label>
-          <select id="sarkari-city-tier" onchange="runGovtComparison()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
-            <option value="X" selected>X Class (Tier-1: Delhi, Mumbai, BLR - 30% HRA)</option>
+          <select id="sarkari-city-tier" onchange="runGovtComparison()" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+            <option value="X" selected>X Class (Tier-1: Delhi, Mumbai, BLR - 30% HRA / Leased Flat)</option>
             <option value="Y">Y Class (Tier-2 Cities - 20% HRA)</option>
             <option value="Z">Z Class (Tier-3 / Rural - 10% HRA)</option>
           </select>
         </div>
-        <!-- DA Rate -->
-        <div>
-          <label class="text-slate-300 font-semibold block mb-1">Dearness Allowance (DA %)</label>
-          <input type="number" id="sarkari-da-rate" value="50" min="40" max="65" oninput="runGovtComparison()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 font-mono text-white text-sm">
-        </div>
       </div>
 
       <!-- Verdict Banner -->
-      <div id="sarkari-verdict-box" class="p-4 rounded-2xl bg-gradient-to-r from-sarkari-950 via-slate-900 to-emerald-950 border border-sarkari-600/40 flex items-center justify-between gap-4">
+      <div id="sarkari-verdict-box" class="p-5 rounded-2xl bg-gradient-to-r from-sarkari-950 via-slate-900 to-emerald-950 border border-sarkari-600/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-sarkari-500/20 text-sarkari-400 flex items-center justify-center shrink-0">
+          <div class="w-12 h-12 rounded-xl bg-sarkari-500/20 text-sarkari-400 flex items-center justify-center shrink-0">
             <i data-lucide="scale" class="w-6 h-6"></i>
           </div>
           <div>
@@ -554,9 +689,9 @@
             <p class="text-xs text-slate-300 mt-0.5" id="sarkari-verdict-desc"></p>
           </div>
         </div>
-        <div class="text-right">
+        <div class="text-left sm:text-right shrink-0">
           <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">Monthly Gap</span>
-          <span id="sarkari-gap-amount" class="text-lg font-black font-mono text-white"></span>
+          <span id="sarkari-gap-amount" class="text-xl font-black font-mono text-white"></span>
         </div>
       </div>
 
@@ -564,116 +699,99 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- Private IT Column -->
-        <div class="bg-slate-800/60 rounded-2xl p-5 border border-emerald-500/30 space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-700">
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-emerald-500/30 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
             <span class="text-base font-bold text-emerald-400 flex items-center gap-2">
               <i data-lucide="laptop" class="w-5 h-5"></i>
               Private Tech Career
             </span>
             <span id="sarkari-pvt-ctc-badge" class="text-xs font-mono bg-emerald-950 text-emerald-300 px-2.5 py-1 rounded-full border border-emerald-800">
-              12 LPA
+              15 LPA
             </span>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="flex justify-between py-2 border-b border-slate-700/60 font-mono">
+            <div class="flex justify-between py-2 border-b border-slate-800 font-mono">
               <span class="text-slate-400">Monthly Net In-Hand:</span>
-              <span id="sarkari-pvt-monthly" class="font-bold text-white text-sm">₹82,450</span>
+              <span id="sarkari-pvt-monthly" class="font-bold text-white text-sm">₹97,696</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60 font-mono">
+            <div class="flex justify-between py-2 border-b border-slate-800 font-mono">
               <span class="text-slate-400">Annual Net Cash:</span>
-              <span id="sarkari-pvt-annual" class="font-bold text-white">₹9,89,400</span>
+              <span id="sarkari-pvt-annual" class="font-bold text-white">₹11,72,352</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60">
+            <div class="flex justify-between py-2 border-b border-slate-800">
               <span class="text-slate-400">Job Security:</span>
               <span class="text-amber-400 font-semibold">Moderate / Market Dependent</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60">
-              <span class="text-slate-400">Typical Work Hours:</span>
+            <div class="flex justify-between py-2 border-b border-slate-800">
+              <span class="text-slate-400">Working Hours:</span>
               <span class="text-slate-200">45 - 55 hours/week</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60">
-              <span class="text-slate-400">Pension / Retirement:</span>
+            <div class="flex justify-between py-2 border-b border-slate-800">
+              <span class="text-slate-400">Pension & Retirement:</span>
               <span class="text-slate-200">EPF Corpus Only</span>
             </div>
             <div class="flex justify-between py-2">
-              <span class="text-slate-400">Long-Term Upside:</span>
-              <span class="text-emerald-400 font-semibold">High (Fast appraisals & ESOPs)</span>
+              <span class="text-slate-400">Career Upside:</span>
+              <span class="text-emerald-400 font-semibold">Fast appraisals, RSUs, global relocations</span>
             </div>
           </div>
         </div>
 
-        <!-- Central Government Column -->
-        <div class="bg-slate-800/60 rounded-2xl p-5 border border-sarkari-500/30 space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-700">
+        <!-- Public Sector Column -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-sarkari-500/30 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
             <span class="text-base font-bold text-sarkari-400 flex items-center gap-2">
               <i data-lucide="shield-check" class="w-5 h-5"></i>
-              Central Government Post
+              <span id="sarkari-govt-title-header">Public Sector Post</span>
             </span>
             <span id="sarkari-govt-level-badge" class="text-xs font-mono bg-sarkari-950 text-sarkari-300 px-2.5 py-1 rounded-full border border-sarkari-800">
-              7th CPC Level 7
+              Level 10
             </span>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="flex justify-between py-2 border-b border-slate-700/60 font-mono">
+            <div class="flex justify-between py-2 border-b border-slate-800 font-mono">
               <span class="text-slate-400">Monthly Net In-Hand:</span>
-              <span id="sarkari-govt-monthly" class="font-bold text-white text-sm">₹67,800</span>
+              <span id="sarkari-govt-monthly" class="font-bold text-white text-sm">₹84,500</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60 font-mono">
+            <div class="flex justify-between py-2 border-b border-slate-800 font-mono">
               <span class="text-slate-400">Annual Net Cash:</span>
-              <span id="sarkari-govt-annual" class="font-bold text-white">₹8,13,600</span>
+              <span id="sarkari-govt-annual" class="font-bold text-white">₹10,14,000</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60 font-mono">
-              <span class="text-slate-400">Total Economic Value:</span>
-              <span id="sarkari-govt-economic" class="font-bold text-sarkari-300">₹9,45,000</span>
+            <div class="flex justify-between py-2 border-b border-slate-800 font-mono">
+              <span class="text-slate-400">Total Economic Package:</span>
+              <span id="sarkari-govt-economic" class="font-bold text-sarkari-300">₹14,50,000</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60">
+            <div class="flex justify-between py-2 border-b border-slate-800">
               <span class="text-slate-400">Job Security:</span>
-              <span class="text-emerald-400 font-bold">10/10 (Guaranteed Central Service)</span>
+              <span class="text-emerald-400 font-bold" id="sarkari-govt-security">10/10</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-slate-700/60">
-              <span class="text-slate-400">Typical Work Hours:</span>
-              <span class="text-slate-200">38 - 40 hours/week (Fixed)</span>
+            <div class="flex justify-between py-2 border-b border-slate-800">
+              <span class="text-slate-400">Working Hours:</span>
+              <span class="text-slate-200" id="sarkari-govt-hours">40 hrs/week</span>
             </div>
             <div class="flex justify-between py-2">
-              <span class="text-slate-400">Health & Retirement:</span>
-              <span class="text-slate-200">NPS + 14% Govt Share + Lifetime CGHS</span>
+              <span class="text-slate-400">Government Match:</span>
+              <span class="text-slate-200">14% Govt NPS Share + Lifetime Healthcare</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Breakdown of Govt Allowances -->
-      <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80">
-        <h3 class="text-sm font-bold text-white mb-3">7th CPC Monthly Pay Structure Deconstruction</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs font-mono text-center">
-          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">Basic Pay</span>
-            <span id="sarkari-part-basic" class="font-bold text-white text-sm mt-1 block">₹44,900</span>
-          </div>
-          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">DA (50%)</span>
-            <span id="sarkari-part-da" class="font-bold text-white text-sm mt-1 block">₹22,450</span>
-          </div>
-          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">HRA (30%)</span>
-            <span id="sarkari-part-hra" class="font-bold text-white text-sm mt-1 block">₹13,470</span>
-          </div>
-          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">Transport Allow.</span>
-            <span id="sarkari-part-ta" class="font-bold text-white text-sm mt-1 block">₹5,400</span>
-          </div>
-          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
-            <span class="text-slate-400 block text-[10px]">Deductions (NPS/CGHS)</span>
-            <span id="sarkari-part-deductions" class="font-bold text-rose-400 text-sm mt-1 block">-₹7,445</span>
-          </div>
+      <!-- Perks & Privileges Checklist -->
+      <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="crown" class="w-4 h-4 text-amber-400"></i>
+          Public Sector Perks, Power & Non-Cash Privileges
+        </h3>
+        <div id="sarkari-perks-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
         </div>
       </div>
 
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 4: VERIFIED SALARY & CAMPUS EXPLORER   -->
+    <!-- TAB 4: VERIFIED SALARY EXPLORER           -->
     <!-- ========================================== -->
     <section id="tab-explorer" class="tab-pane hidden space-y-6">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-3">
@@ -683,152 +801,139 @@
             Verified Tech Salary & Campus Explorer
           </h1>
           <p class="text-slate-400 text-sm mt-1">
-            Browse and search audited compensation observations across 150 tech employers in India with transparent confidence ratings and source links.
+            Browse verified Indian compensation observations across top tech employers. Only companies with concrete, verified salary data are showcased.
           </p>
         </div>
-        <div class="text-xs font-mono text-slate-400 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">
-          Showing <span id="explorer-count" class="text-emerald-400 font-bold">150</span> Employers
+        <div class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
+          Showing <span id="explorer-count" class="text-emerald-400 font-bold">85</span> Verified Employers
         </div>
       </div>
 
-      <!-- Search & Filter Bar -->
-      <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-slate-800/60 p-4 rounded-2xl border border-slate-700/80 text-xs">
-        <div class="sm:col-span-5 relative">
+      <!-- Search & Filters -->
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-xs">
+        <div class="sm:col-span-6 relative">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
-          <input type="text" id="explorer-search" placeholder="Search company by name or category (e.g., TCS, Google, Fintech)..." oninput="filterCompanies()" class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 text-xs">
+          <input type="text" id="explorer-search" placeholder="Search by company name (e.g. Google, TCS, Flipkart, Goldman Sachs)..." oninput="filterCompanies()" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 text-xs">
         </div>
-        <div class="sm:col-span-4">
-          <select id="explorer-industry" onchange="filterCompanies()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-brand-500">
-            <option value="">All Industry Categories</option>
-            <option value="IT services">IT Services & Consulting</option>
-            <option value="Enterprise software">Enterprise Software & Cloud</option>
-            <option value="Semiconductors">Semiconductors & Hardware</option>
+        <div class="sm:col-span-6">
+          <select id="explorer-industry" onchange="filterCompanies()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-brand-500">
+            <option value="">All Categories (Big Tech, FinTech, Unicorns, IT Services)</option>
+            <option value="Global Big Tech">Global Big Tech & Internet</option>
+            <option value="Enterprise">Enterprise Software & Cloud</option>
             <option value="Fintech">Fintech & Payments</option>
-            <option value="Cybersecurity">Cybersecurity</option>
-          </select>
-        </div>
-        <div class="sm:col-span-3">
-          <select id="explorer-breakdown-filter" onchange="filterCompanies()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-brand-500">
-            <option value="">All Records</option>
-            <option value="has_breakdown">With Granular Breakdowns</option>
-            <option value="campus_only">Campus Drives Only</option>
+            <option value="Investment Banking">Investment Banking & Quant</option>
+            <option value="E-Commerce">E-Commerce & Quick Commerce</option>
+            <option value="IT services">IT Services & Consulting</option>
+            <option value="Semiconductors">Semiconductors & Hardware</option>
           </select>
         </div>
       </div>
 
-      <!-- Company Cards Grid -->
+      <!-- Cards Grid -->
       <div id="explorer-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Rendered dynamically via app.js -->
       </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 5: 2026-27 TAX REGIME GUIDE & SLABS    -->
+    <!-- TAB 5: PLAIN ENGLISH GLOSSARY & TAX GUIDE -->
     <!-- ========================================== -->
-    <section id="tab-taxguide" class="tab-pane hidden space-y-6">
+    <section id="tab-glossary" class="tab-pane hidden space-y-6">
       <div class="border-b border-slate-800 pb-3">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-          <i data-lucide="receipt-text" class="w-7 h-7 text-emerald-400"></i>
-          Income Tax Slabs & Rules (Tax Year 2026-27)
+          <i data-lucide="help-circle" class="w-7 h-7 text-emerald-400"></i>
+          Salary Terms in Plain English (Zero Jargon)
         </h1>
         <p class="text-slate-400 text-sm mt-1">
-          Statutory framework under the <strong>Income-tax Act, 2025</strong> and <strong>Finance Act, 2026</strong>.
+          Everything you need to know about your Indian payslip, tax rules, and hidden employer clauses explained simply.
         </p>
       </div>
 
-      <!-- Zero Tax Callout -->
-      <div class="p-5 rounded-2xl bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 border border-emerald-600/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
-          <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mb-1">
-            KEY STATUTORY BENEFIT
-          </span>
-          <h2 class="text-lg font-bold text-white">The Zero-Tax Threshold: ₹12,75,000</h2>
-          <p class="text-xs text-slate-300 mt-1 max-w-2xl">
-            Under Section 156(2) of the Income-tax Act, 2025, salaried individuals whose gross salary is up to ₹12.75 Lakhs pay <strong>₹0 Income Tax</strong> after deducting the ₹75,000 standard deduction and claiming the ₹60,000 rebate.
+      <!-- Glossary Accordion Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Card 1: Basic Pay -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">1. Basic Salary</span>
+          <h3 class="text-base font-bold text-white">The Foundation of Your Pay</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Basic pay is the core fixed amount of your salary (usually 40% to 50% of your package). It is 100% taxable. 
+            <strong>Why it matters:</strong> Your Provident Fund (12%), Gratuity (4.81%), and HRA (40-50%) are calculated directly as percentages of this number. A lower basic means more in-hand cash today, but less retirement corpus.
           </p>
         </div>
-        <div class="text-center font-mono bg-slate-900/80 px-4 py-3 rounded-xl border border-slate-700 shrink-0">
-          <span class="text-[10px] text-slate-400 block uppercase font-semibold">Tax on ₹12.75 LPA</span>
-          <span class="text-2xl font-black text-emerald-400">₹0</span>
+
+        <!-- Card 2: HRA -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">2. House Rent Allowance (HRA)</span>
+          <h3 class="text-base font-bold text-white">Rent Subsidy Allowance</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Provided by employers to cover accommodation costs. Standardly calculated as 50% of Basic Pay in metro cities (Delhi, Mumbai, Bengaluru, Chennai, Kolkata) and 40% in non-metros. Under the <strong>Old Tax Regime</strong>, HRA is partially or fully tax-exempt if you submit rent receipts. Under the <strong>New Tax Regime</strong>, HRA has no tax exemption.
+          </p>
         </div>
+
+        <!-- Card 3: Special Allowance -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">3. Special / Flexi Allowance</span>
+          <h3 class="text-base font-bold text-white">The "Balancing Figure"</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Special allowance is simply whatever money is left over after allocating Basic and HRA to reach your promised gross salary. It has no special tax exemptions and is 100% taxable at slab rates.
+          </p>
+        </div>
+
+        <!-- Card 4: Employer vs Employee PF -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-wider block">4. Provident Fund (EPF)</span>
+          <h3 class="text-base font-bold text-white">The 24% Retirement Deduction</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Total statutory PF contribution is 24% of Basic Pay. 
+            <strong>12% is paid by you (Employee PF)</strong>, deducted from your monthly gross pay. 
+            <strong>12% is paid by your employer (Employer PF)</strong>, but almost every Indian company sneaks this into your headline CTC! If your basic is high, capping PF at the statutory ₹1,800/mo ceiling significantly boosts your monthly in-hand cash.
+          </p>
+        </div>
+
+        <!-- Card 5: Gratuity -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block">5. Gratuity (The 5-Year Catch)</span>
+          <h3 class="text-base font-bold text-white">You Don't Get It Unless You Stay 5 Years!</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Under the Payment of Gratuity Act, 1972, companies are required by law to pay 15 days of basic pay for every completed year of service. However, companies deduct ~4.81% of your basic from your headline CTC every month. If you leave the company before <strong>5 continuous years</strong>, you forfeit this money completely!
+          </p>
+        </div>
+
+        <!-- Card 6: TDS -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block">6. Tax Deducted at Source (TDS)</span>
+          <h3 class="text-base font-bold text-white">Your Monthly Income Tax Installment</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Instead of making you pay a huge tax bill at the end of March, your employer projects your annual tax under your chosen regime (New vs Old) and divides it by 12, withholding that exact amount from your monthly bank deposit.
+          </p>
+        </div>
+
       </div>
 
-      <!-- Slabs Table -->
-      <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700/80 overflow-x-auto space-y-4">
-        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-          <i data-lucide="table" class="w-4 h-4 text-emerald-400"></i>
-          Default New Tax Regime Slabs (Income-tax Act, 2025 s.202(1))
-        </h3>
-        <table class="w-full text-xs font-mono">
-          <thead>
-            <tr class="border-b border-slate-700 text-left text-slate-400">
-              <th class="py-2.5 px-4 font-semibold">Income Bracket</th>
-              <th class="py-2.5 px-4 font-semibold">Tax Rate</th>
-              <th class="py-2.5 px-4 font-semibold">Tax Computation</th>
-              <th class="py-2.5 px-4 font-semibold text-right">Cumulative Slab Tax</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-700/60 text-slate-200">
-            <tr>
-              <td class="py-2 px-4">₹0 to ₹4,00,000</td>
-              <td class="py-2 px-4 text-emerald-400 font-bold">Nil (0%)</td>
-              <td class="py-2 px-4 text-slate-400">No tax</td>
-              <td class="py-2 px-4 text-right">₹0</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">₹4,00,001 to ₹8,00,000</td>
-              <td class="py-2 px-4 text-emerald-400 font-bold">5%</td>
-              <td class="py-2 px-4 text-slate-400">5% of amount over ₹4L</td>
-              <td class="py-2 px-4 text-right">₹20,000</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">₹8,00,001 to ₹12,00,000</td>
-              <td class="py-2 px-4 text-emerald-400 font-bold">10%</td>
-              <td class="py-2 px-4 text-slate-400">₹20k + 10% of amount over ₹8L</td>
-              <td class="py-2 px-4 text-right">₹60,000 (Fully rebated)</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">₹12,00,001 to ₹16,00,000</td>
-              <td class="py-2 px-4 text-amber-400 font-bold">15%</td>
-              <td class="py-2 px-4 text-slate-400">₹60k + 15% of amount over ₹12L</td>
-              <td class="py-2 px-4 text-right">₹1,20,000</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">₹16,00,001 to ₹20,00,000</td>
-              <td class="py-2 px-4 text-amber-400 font-bold">20%</td>
-              <td class="py-2 px-4 text-slate-400">₹1.2L + 20% of amount over ₹16L</td>
-              <td class="py-2 px-4 text-right">₹2,00,000</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">₹20,00,001 to ₹24,00,000</td>
-              <td class="py-2 px-4 text-amber-400 font-bold">25%</td>
-              <td class="py-2 px-4 text-slate-400">₹2.0L + 25% of amount over ₹20L</td>
-              <td class="py-2 px-4 text-right">₹3,00,000</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-4">Above ₹24,00,000</td>
-              <td class="py-2 px-4 text-rose-400 font-bold">30%</td>
-              <td class="py-2 px-4 text-slate-400">₹3.0L + 30% of amount over ₹24L</td>
-              <td class="py-2 px-4 text-right">30% marginal rate</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- FAQ Section -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-        <div class="p-4 bg-slate-800/60 rounded-xl border border-slate-700/80 space-y-1.5">
-          <h4 class="font-bold text-white text-sm">How does Marginal Relief work?</h4>
-          <p class="text-slate-400">
-            If your taxable income is ₹12,25,000 (just ₹25k above the ₹12L threshold), regular slab tax would be ₹63,750. However, statutory marginal relief ensures your tax before cess cannot exceed the income exceeding ₹12L. Thus, tax is capped at exactly ₹25,000 (+ 4% cess = ₹26,000).
-          </p>
+      <!-- Slabs Reference -->
+      <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 space-y-3">
+        <h3 class="text-sm font-bold text-white">Quick Reference: FY 2026-27 Tax Slabs (New Regime)</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+          <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+            <span class="text-slate-400 block">Up to ₹4,00,000</span>
+            <span class="font-bold text-emerald-400 mt-1 block">0% (Nil)</span>
+          </div>
+          <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+            <span class="text-slate-400 block">₹4L to ₹8L</span>
+            <span class="font-bold text-emerald-400 mt-1 block">5%</span>
+          </div>
+          <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+            <span class="text-slate-400 block">₹8L to ₹12L</span>
+            <span class="font-bold text-emerald-400 mt-1 block">10% (Rebated)</span>
+          </div>
+          <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+            <span class="text-slate-400 block">₹12L to ₹16L</span>
+            <span class="font-bold text-amber-400 mt-1 block">15%</span>
+          </div>
         </div>
-        <div class="p-4 bg-slate-800/60 rounded-xl border border-slate-700/80 space-y-1.5">
-          <h4 class="font-bold text-white text-sm">Standard Deduction (₹75,000)</h4>
-          <p class="text-slate-400">
-            Under Section 19(1) of the Income-tax Act, 2025, salaried individuals get an automatic ₹75,000 standard deduction under the new regime without needing to submit any rent receipts or investment proofs.
-          </p>
-        </div>
+        <p class="text-xs text-slate-400">
+          * Salaried employees receive a ₹75,000 standard deduction. Anyone earning up to ₹12.75 LPA pays <strong>₹0 tax</strong> after Section 156(2) rebate.
+        </p>
       </div>
 
     </section>
@@ -849,7 +954,6 @@
       </div>
 
       <div id="modal-content" class="space-y-4 text-xs">
-        <!-- Rendered dynamically -->
       </div>
     </div>
   </div>
@@ -861,7 +965,7 @@
       <div class="flex items-center gap-4 text-slate-400">
         <span>Verified against Income-tax Act, 2025 & 7th CPC</span>
         <span>•</span>
-        <a href="#tab-taxguide" onclick="switchTab('taxguide')" class="hover:text-emerald-400 transition-colors">Statutory Rules</a>
+        <button onclick="switchTab('glossary')" class="hover:text-emerald-400 transition-colors">Plain English Glossary</button>
       </div>
     </div>
   </footer>

@@ -82,3 +82,4 @@ def compare_two_offers(offer_a: Dict[str, Any], offer_b: Dict[str, Any]) -> Dict
             "verdict": verdict
         }
     }
+

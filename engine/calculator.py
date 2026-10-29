@@ -330,3 +330,4 @@ def deconstruct_ctc(
             "paper_wealth_equity_pct": round((annual_equity / annual_ctc * 100.0) if annual_ctc > 0 else 0.0, 1)
         }
     }
+
