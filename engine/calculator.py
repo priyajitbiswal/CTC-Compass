@@ -23,8 +23,15 @@ OLD_REGIME_SLABS = [
 ]
 
 
+def round_tax_statutory(val: float) -> int:
+    """Rounds off tax to the nearest multiple of ten rupees under Section 288B."""
+    if val <= 0:
+        return 0
+    return int(round(val / 10.0) * 10)
+
+
 def calculate_progressive_tax(taxable_income: float, slabs) -> float:
-    """Calculates progressive tax without rebate, surcharge, or cess."""
+    """Calculates progressive slab tax without rebate, surcharge, or cess."""
     if taxable_income <= 0:
         return 0.0
 
@@ -46,10 +53,11 @@ def calculate_new_regime_tax_2026(
     """
     Computes income tax under the New Tax Regime for Tax Year 2026-27.
     Statutory references:
-      - Income-tax Act, 2025 s.202(1) (Slabs)
-      - Income-tax Act, 2025 s.19(1) (Standard deduction ₹75,000)
+      - Income-tax Act, 2025 s.202(1) (Progressive 7-Slab Structure)
+      - Income-tax Act, 2025 s.19(1) (Standard deduction ₹75,000 for salaried employees)
       - Income-tax Act, 2025 s.156(2) (Rebate up to ₹60,000 for income <= ₹12L, plus marginal relief)
-      - Finance Act, 2026 (4% Cess, Surcharge capped at 25%)
+      - Finance Act, 2026 (4% Cess, Surcharge capped at 25% under Section 202)
+      - Income-tax Act, 2025 s.288B (Rounding off to nearest multiple of ₹10)
     """
     standard_deduction = min(annual_salary, 75000.0)
     gross_income = annual_salary + other_income
@@ -64,7 +72,6 @@ def calculate_new_regime_tax_2026(
     tax_after_rebate = slab_tax
 
     if taxable_income <= 1200000.0:
-        # Full rebate up to ₹60,000 (which covers 100% of tax on ₹12L)
         rebate = min(slab_tax, 60000.0)
         tax_after_rebate = max(0.0, slab_tax - rebate)
     else:
@@ -90,10 +97,10 @@ def calculate_new_regime_tax_2026(
     # 4. Health & Education Cess (4%)
     cess = 0.04 * (tax_after_rebate + surcharge)
 
-    total_annual_tax = round(tax_after_rebate + surcharge + cess)
+    total_annual_tax = round_tax_statutory(tax_after_rebate + surcharge + cess)
     monthly_tds = round(total_annual_tax / 12.0)
 
-    effective_rate = (total_annual_tax / annual_salary * 100) if annual_salary > 0 else 0.0
+    effective_rate = (total_annual_tax / annual_salary * 100.0) if annual_salary > 0 else 0.0
 
     return {
         "regime": "new_2026_27",
@@ -145,10 +152,10 @@ def calculate_old_regime_tax(
 
     surcharge = tax_after_rebate * surcharge_rate
     cess = 0.04 * (tax_after_rebate + surcharge)
-    total_annual_tax = round(tax_after_rebate + surcharge + cess)
+    total_annual_tax = round_tax_statutory(tax_after_rebate + surcharge + cess)
     monthly_tds = round(total_annual_tax / 12.0)
 
-    effective_rate = (total_annual_tax / annual_salary * 100) if annual_salary > 0 else 0.0
+    effective_rate = (total_annual_tax / annual_salary * 100.0) if annual_salary > 0 else 0.0
 
     return {
         "regime": "old",
@@ -200,11 +207,9 @@ def deconstruct_ctc(
     ctc_for_cash_structure = max(0.0, annual_ctc - non_salary_in_ctc)
 
     # Basic Salary estimation
-    # Many companies define basic as ~40% to 50% of CTC or fixed gross
     estimated_basic = round(ctc_for_cash_structure * basic_ratio)
 
     # Statutory EPF: 12% of basic
-    # If capped at statutory wage ceiling (₹15,000/mo), monthly contribution is ₹1,800 (₹21,600/yr)
     if cap_epf_at_statutory_ceiling:
         annual_epf_per_side = min(estimated_basic * 0.12, 21600.0)
     else:
@@ -213,7 +218,7 @@ def deconstruct_ctc(
     employer_epf = annual_epf_per_side
     employee_epf = annual_epf_per_side
 
-    # Gratuity: ~4.81% of basic pay (15/26 days per year)
+    # Gratuity: ~4.81% of basic pay (15/26 days per year under Payment of Gratuity Act)
     gratuity = round(estimated_basic * 0.0481) if include_gratuity_in_ctc else 0.0
 
     # Group Medical Insurance
@@ -229,10 +234,15 @@ def deconstruct_ctc(
     annual_variable_target = round(gross_cash_annual * variable_ratio)
     annual_fixed_gross = max(0.0, gross_cash_annual - annual_variable_target)
 
-    # Fixed components breakdown:
-    # Basic = estimated_basic (or bounded)
-    fixed_basic = min(estimated_basic, annual_fixed_gross)
-    hra = round(fixed_basic * 0.40)  # Standard 40% (50% in metros)
+    # Reconcile payslip components so Basic + HRA + Special Allowance ALWAYS exactly equals fixed gross
+    # Standard: Basic ~40-50%, HRA ~40% of Basic.
+    # If basic + hra would exceed annual_fixed_gross, scale basic down cleanly.
+    if estimated_basic * 1.40 > annual_fixed_gross:
+        fixed_basic = round(annual_fixed_gross / 1.40)
+    else:
+        fixed_basic = estimated_basic
+
+    hra = round(fixed_basic * 0.40)
     special_allowance = max(0.0, annual_fixed_gross - fixed_basic - hra)
 
     # Total Year 1 Gross Taxable Cash (including bonuses)
@@ -266,7 +276,12 @@ def deconstruct_ctc(
 
     # Monthly In-Hand (Guaranteed Recurring Base: Basic + HRA + Special Allowance)
     monthly_fixed_gross = round(annual_fixed_gross / 12.0)
-    monthly_fixed_in_hand = max(0.0, monthly_fixed_gross - monthly_employee_pf - monthly_prof_tax - monthly_tds)
+    monthly_basic = round(fixed_basic / 12.0)
+    monthly_hra = round(hra / 12.0)
+    # Ensure exact sum balance: monthly_basic + monthly_hra + monthly_special == monthly_fixed_gross
+    monthly_special = max(0, monthly_fixed_gross - monthly_basic - monthly_hra)
+
+    monthly_fixed_in_hand = max(0, monthly_fixed_gross - total_monthly_statutory_deductions)
 
     # Monthly In-Hand assuming variable pay paid out monthly or quarterly averaged
     monthly_variable_amortized = round(annual_variable_target / 12.0)
@@ -295,9 +310,9 @@ def deconstruct_ctc(
         "monthly_pay_slip": {
             "fixed_gross": monthly_fixed_gross,
             "breakdown": {
-                "basic_pay": round(fixed_basic / 12.0),
-                "hra": round(hra / 12.0),
-                "special_allowance": round(special_allowance / 12.0)
+                "basic_pay": monthly_basic,
+                "hra": monthly_hra,
+                "special_allowance": monthly_special
             },
             "deductions": {
                 "employee_pf": monthly_employee_pf,
@@ -330,4 +345,3 @@ def deconstruct_ctc(
             "paper_wealth_equity_pct": round((annual_equity / annual_ctc * 100.0) if annual_ctc > 0 else 0.0, 1)
         }
     }
-
