@@ -1,0 +1,61 @@
+input_company_name,company_id,canonical_company_name,campus_ctc_min_lpa,campus_ctc_max_lpa,included_as_employer,note
+Redington Group,COMP120,Redington Group,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Tata Consultancy Services (TCS),COMP001,Tata Consultancy Services,3.4,9.1,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+World Wide Technology (WWT),COMP121,World Wide Technology,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Myntra,COMP107,Myntra,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Mondee,COMP122,Mondee,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+BalkanID,COMP123,BalkanID,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Ensemble Health Partners India,COMP124,Ensemble Health Partners India,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+CITI,COMP105,Citi India,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+PayPal,COMP051,PayPal,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Razorpay,COMP125,Razorpay,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+"Ashley Furniture Industries, Inc.",COMP102,Ashley Furniture Industries,6.5,6.5,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+NCR Voyix,COMP112,NCR Voyix,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+HCLTech,COMP004,HCLTech,4.5,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Vehant Technologies,COMP126,Vehant Technologies,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Zen Data Shastra,COMP127,Zen Data Shastra,5.0,5.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Grad Partners,COMP128,Grad Partners,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Motorq,COMP106,Motorq,11.0,11.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Futures First,COMP129,Futures First,18.9,18.9,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+BNP PARIBAS,COMP103,BNP Paribas India Solutions,8.4,8.4,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+V-Guard Industries Ltd.,COMP130,V-Guard Industries Ltd.,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Presidio,COMP131,Presidio,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Trimble,COMP113,Trimble,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Quest1,COMP132,Quest1,15.0,15.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Axtria,COMP114,Axtria,5.5,5.5,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Platform Science,COMP133,Platform Science,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+TransUnion,COMP115,TransUnion,8.5,8.5,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Foodhub Software Solutions,COMP118,Foodhub Software Solutions,14.0,14.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Zensar Technologies,COMP111,Zensar Technologies,6.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+BluBridge Technologies,COMP134,BluBridge Technologies,6.0,12.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Linarc,COMP135,Linarc,9.0,9.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Kaleris,COMP136,Kaleris,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Sundaram Finance,COMP137,Sundaram Finance,6.0,6.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+goML,COMP138,goML,7.0,7.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Vaisala India PVT LTD,COMP139,Vaisala India,6.0,8.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+HyperVerge,COMP110,HyperVerge,14.0,19.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Mphasis,COMP033,Mphasis,6.0,6.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Predigle,COMP140,Predigle,6.0,9.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Info Edge (India) Ltd.,COMP108,Info Edge (India) Limited,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Hewlett Packard Enterprise (HPE),COMP117,Hewlett Packard Enterprise (HPE),8.0,18.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Ford Business Solutions,COMP101,Ford Business Solutions,7.25,10.68,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Toyota Connected India,COMP116,Toyota Connected India,10.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+LTM,COMP012,LTIMindtree,4.1,4.1,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Prodapt,COMP119,Prodapt,8.0,10.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Crossbow Enterprise Cybersecurity,COMP141,Crossbow Enterprise Cybersecurity,5.0,5.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Tejas Networks,COMP142,Tejas Networks,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+HSBC,COMP109,HSBC India,16.3,16.3,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Syrma SGS Technology Ltd,COMP143,Syrma SGS Technology Ltd,6.0,6.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Mindsprint,COMP144,Mindsprint,9.0,9.0,yes,Campus CTC from user-provided list; not independently verified. Blank CTC means none supplied or stipend/prize-only entry.
+Fidelity Investments,COMP104,Fidelity Investments India,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Qualcomm,COMP019,Qualcomm,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+Broadcom,COMP043,Broadcom,,,yes,Company included; no CTC recorded from the user list (stipend/prize amounts excluded).
+LinkedIn,COMP145,LinkedIn,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+Wells Fargo,COMP146,Wells Fargo,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+JioHotstar,COMP147,JioHotstar,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+Apple,COMP148,Apple,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+Ford Motor Company,COMP149,Ford Motor Company,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+Databricks,COMP150,Databricks,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+D. E. Shaw India,COMP151,D. E. Shaw India,,,yes,Added because public India compensation-post evidence was found; social observations are self-reported and should not be read as official company bands.
+Tata Consultancy Services,COMP001,Tata Consultancy Services,,,yes,Company included; public self-reported compensation post found. Salary observation is not an official company band.
+BNP Paribas,COMP103,BNP Paribas India Solutions,,,yes,Company included; public self-reported compensation post found. Salary observation is not an official company band.
