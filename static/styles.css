@@ -1,0 +1,57 @@
+/* CTC Compass India Custom Styles */
+
+/* Navigation Tab Active Styling */
+.nav-tab {
+  color: #94a3b8;
+}
+
+.nav-tab:hover {
+  color: #f8fafc;
+  background-color: rgba(30, 41, 59, 0.7);
+}
+
+.nav-tab.active {
+  color: #10b981;
+  background-color: rgba(6, 78, 59, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Tab panes */
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
